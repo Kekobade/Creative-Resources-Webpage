@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Resources Index</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#12161d;
+    --panel:#181d26;
+    --card:#1d2430;
+    --card-border:#2a3240;
+    --paper:#e9e6dc;
+    --paper-dim:#9aa1af;
+    --teal:#5fc4b8;
+    --amber:#e3a545;
+    --thread:#333d4d;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  /* ---------- Header ---------- */
+  header{
+    padding:64px 32px 40px;
+    max-width:1180px;
+    margin:0 auto;
+    border-bottom:1px solid var(--thread);
+  }
+  .kicker{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:18px;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-optical-sizing:auto;
+    font-size:clamp(38px,6vw,68px);
+    line-height:1.02;
+    margin:0 0 18px;
+    letter-spacing:-0.01em;
+  }
+  header p.sub{
+    max-width:620px;
+    color:var(--paper-dim);
+    font-size:16px;
+    line-height:1.6;
+    margin:0 0 28px;
+  }
+  .legend{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+  }
+  .legend span.tag{
+    display:inline-block;
+    padding:2px 8px;
+    border-radius:3px;
+    margin-right:6px;
+    font-size:11px;
+  }
+  .tag.free{background:rgba(95,196,184,.15);color:var(--teal);}
+  .tag.paid{background:rgba(227,165,69,.15);color:var(--amber);}
+
+  /* ---------- Layout ---------- */
+  .wrap{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    max-width:1180px;
+    margin:0 auto;
+    gap:0;
+  }
+  nav.index{
+    position:sticky;
+    top:0;
+    align-self:start;
+    padding:40px 20px 40px 32px;
+    height:100vh;
+    overflow-y:auto;
+    border-right:1px solid var(--thread);
+  }
+  nav.index .drawer-label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    margin-bottom:16px;
+  }
+  nav.index ol{
+    list-style:none;
+    margin:0;
+    padding:0;
+    counter-reset:idx;
+  }
+  nav.index li{
+    counter-increment:idx;
+    margin-bottom:2px;
+  }
+  nav.index a{
+    display:flex;
+    gap:10px;
+    align-items:baseline;
+    text-decoration:none;
+    padding:9px 8px;
+    border-radius:4px;
+    font-size:13.5px;
+    color:var(--paper-dim);
+    transition:background .15s ease, color .15s ease;
+  }
+  nav.index a::before{
+    content:counter(idx, decimal-leading-zero);
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;
+    color:var(--thread);
+  }
+  nav.index a:hover, nav.index a.active{
+    background:var(--panel);
+    color:var(--paper);
+  }
+  nav.index a:hover::before, nav.index a.active::before{
+    color:var(--teal);
+  }
+
+  main{
+    padding:40px 32px 120px;
+    min-width:0;
+  }
+
+  section.category{
+    margin-bottom:64px;
+    scroll-margin-top:24px;
+  }
+  section.category .cat-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    margin-bottom:6px;
+    border-bottom:1px solid var(--thread);
+    padding-bottom:14px;
+  }
+  section.category .cat-num{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--teal);
+    font-size:13px;
+  }
+  section.category h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:28px;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  section.category .cat-count{
+    margin-left:auto;
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    color:var(--paper-dim);
+  }
+
+  .subgroup{
+    margin-top:28px;
+  }
+  .subgroup h3{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--paper-dim);
+    margin:0 0 14px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:12px;
+  }
+
+  .card{
+    display:block;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    padding:16px 18px;
+    text-decoration:none;
+    transition:border-color .15s ease, transform .15s ease, background .15s ease;
+  }
+  .card:hover{
+    border-color:var(--teal);
+    background:#212938;
+    transform:translateY(-2px);
+  }
+  .card-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+    margin-bottom:6px;
+  }
+  .card-title{
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--paper);
+  }
+  .card-title .arrow{
+    display:inline-block;
+    opacity:0;
+    transform:translate(-3px,1px);
+    transition:opacity .15s ease, transform .15s ease;
+    color:var(--teal);
+    font-size:13px;
+  }
+  .card:hover .card-title .arrow{
+    opacity:1;
+    transform:translate(0,1px);
+  }
+  .card-desc{
+    font-size:13px;
+    color:var(--paper-dim);
+    line-height:1.5;
+  }
+  .badges{
+    display:flex;
+    gap:6px;
+    flex-shrink:0;
+  }
+  .badge{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;
+    padding:2px 6px;
+    border-radius:3px;
+    white-space:nowrap;
+  }
+  .badge.free{background:rgba(95,196,184,.15);color:var(--teal);}
+  .badge.paid{background:rgba(227,165,69,.15);color:var(--amber);}
+  .badge.plat{background:rgba(255,255,255,.06);color:var(--paper-dim);}
+
+  footer{
+    max-width:1180px;
+    margin:0 auto;
+    padding:40px 32px 60px;
+    border-top:1px solid var(--thread);
+    color:var(--paper-dim);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+  }
+  footer a{color:var(--teal);text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  @media (max-width:860px){
+    .wrap{grid-template-columns:1fr;}
+    nav.index{
+      position:static;
+      height:auto;
+      border-right:none;
+      border-bottom:1px solid var(--thread);
+      padding:24px 20px;
+    }
+    nav.index ol{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+    }
+    nav.index a::before{display:none;}
+    nav.index a{padding:6px 10px;background:var(--panel);border-radius:20px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">// card catalog — visual design</div>
+  <h1>Design Resources Index</h1>
+  <p class="sub">A catalog of learning resources, software, web tools, assets, type, and color tools for the design journey — pulled together from the graphicdesign Discord community. Every entry opens in a new tab.</p>
+  <div class="legend">
+    <div><span class="tag free">free</span> no cost to use</div>
+    <div><span class="tag paid">$</span> paid or subscription</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="index" id="indexNav">
+    <div class="drawer-label">Drawers</div>
+    <ol>
+      <li><a href="#educational">Educational</a></li>
+      <li><a href="#software">Software &amp; Utilities</a></li>
+      <li><a href="#webtools">Web Tools</a></li>
+      <li><a href="#assets">Assets</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#fontid">Font Identification</a></li>
+      <li><a href="#color">Color</a></li>
+      <li><a href="#share">Share Your Work</a></li>
+      <li><a href="#misc">Miscellaneous</a></li>
+    </ol>
+  </nav>
+
+  <main>
+
+    <!-- EDUCATIONAL -->
+    <section class="category" id="educational">
+      <div class="cat-head">
+        <span class="cat-num">01</span>
+        <h2>Educational</h2>
+        <span class="cat-count">tutorials · courses · YouTube</span>
+      </div>
+
+      <div class="subgroup">
+        <h3>Adobe official</h3>
+        <div class="grid">
+          <a class="card" href="https://helpx.adobe.com/photoshop/tutorials.html" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Adobe Learn / Photoshop <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Official Photoshop tutorials on adobe.com</div>
+          </a>
+          <a class="card" href="https://helpx.adobe.com/illustrator/tutorials.html" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Adobe Learn / Illustrator <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Official Illustrator tutorials on adobe.com</div>
+          </a>
+          <a class="card" href="https://helpx.adobe.com/after-effects/tutorials.html" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Adobe Learn / After Effects <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Official After Effects tutorials on adobe.com</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Course platforms</h3>
+        <div class="grid">
+          <a class="card" href="https://www.skillshare.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Skillshare <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Online courses covering various design topics</div>
+          </a>
+          <a class="card" href="https://www.linkedin.com/learning" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">LinkedIn Learning <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Online courses covering various design topics</div>
+          </a>
+          <a class="card" href="https://www.coursera.org" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Coursera <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Online courses covering various design topics</div>
+          </a>
+          <a class="card" href="https://tutsplus.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Envato Tuts+ <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Online courses covering various design topics</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Web design &amp; dev</h3>
+        <div class="grid">
+          <a class="card" href="https://www.w3schools.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">W3Schools <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Tutorials and courses for web design and programming</div>
+          </a>
+          <a class="card" href="https://developer.mozilla.org/docs/" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">MDN Web Docs <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Tutorials and various web development resources</div>
+          </a>
+          <a class="card" href="https://javascript.info" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">The Modern JavaScript Tutorial <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Up-to-date JavaScript tutorials</div>
+          </a>
+          <a class="card" href="https://learnmobile.design" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Learn Mobile Design <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Curated list of educational mobile design resources</div>
+          </a>
+          <a class="card" href="https://www.toools.design/" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">TOOOLS.design <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">A collection of resources to help designers</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>UI / UX</h3>
+        <div class="grid">
+          <a class="card" href="https://asktog.com/atc/principles-of-interaction-design" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">First Principles of Interaction Design <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Foundational guide for UI/UX</div>
+          </a>
+          <a class="card" href="https://www.degreeless.design" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Degreeless.Design <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Curated list of educational UI/UX resources</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Typography practice</h3>
+        <div class="grid">
+          <a class="card" href="https://practicaltypography.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Butterick's Practical Typography <span class="arrow">↗</span></span></div>
+            <div class="card-desc">A practical guide to typography</div>
+          </a>
+          <a class="card" href="http://webtypography.net" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Web Typography <span class="arrow">↗</span></span></div>
+            <div class="card-desc">A guide to typography on the web</div>
+          </a>
+          <a class="card" href="https://99designs.com/blog/tips/11-kerning-tips" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">10 Kerning Tips <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Blog post of ten essential kerning tips</div>
+          </a>
+          <a class="card" href="https://type.method.ac" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Kern Type <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Test your kerning skills</div>
+          </a>
+          <a class="card" href="https://shape.method.ac" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Shape Type <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Practice shaping letters</div>
+          </a>
+          <a class="card" href="https://bezier.method.ac" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">The Bézier Game <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Learn to use the pen tool</div>
+          </a>
+          <a class="card" href="https://boolean.method.ac" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">The Boolean Game <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Practice boolean vector operations (pathfinder in Illustrator)</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Guides &amp; video channels</h3>
+        <div class="grid">
+          <a class="card" href="https://hackdesign.org/lessons" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Hack Design <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Curated lists of design tutorials and helpful guides</div>
+          </a>
+          <a class="card" href="https://www.youtube.com/c/thefuturishere" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">The Futur / Futur Academy <span class="arrow">↗</span></span></div>
+            <div class="card-desc">YouTube channel focused on the business side of design</div>
+          </a>
+          <a class="card" href="https://www.youtube.com/c/Texturelabs" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Texturelabs <span class="arrow">↗</span></span></div>
+            <div class="card-desc">YouTube channel on stylistic effects in Photoshop</div>
+          </a>
+          <a class="card" href="https://www.youtube.com/c/phlearn" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">PHLEARN <span class="arrow">↗</span></span></div>
+            <div class="card-desc">YouTube channel focused on photo retouching in Photoshop</div>
+          </a>
+          <a class="card" href="https://www.youtube.com/c/ByolAuAdobe" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Bring Your Own Laptop <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Tutorials for various Adobe software</div>
+          </a>
+          <a class="card" href="https://youtube.com/playlist?list=PLYfCBK8IplO77FDDLnS06qEMoVLD7Qyib" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Beginner's Guide to After Effects <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Free YouTube playlist course for learning After Effects</div>
+          </a>
+          <a class="card" href="https://www.youtube.com/user/AndrewPPrice" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Blender Guru <span class="arrow">↗</span></span></div>
+            <div class="card-desc">3D modeling tutorials in Blender, good for beginners</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SOFTWARE -->
+    <section class="category" id="software">
+      <div class="cat-head">
+        <span class="cat-num">02</span>
+        <h2>Software &amp; Utilities</h2>
+        <span class="cat-count">apps you install</span>
+      </div>
+
+      <div class="subgroup">
+        <h3>2D / raster / vector</h3>
+        <div class="grid">
+          <a class="card" href="https://www.adobe.com/creativecloud.html" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Adobe Creative Cloud <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">De-facto standard in professional creative software; discounted student rates; some apps have mobile versions</div>
+          </a>
+          <a class="card" href="https://www.affinity.studio/" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Affinity Studio <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Budget-friendly with advanced AI features; a respectable Adobe alternative (Photo/Designer/Publisher); iPad versions available</div>
+          </a>
+          <a class="card" href="https://www.gimp.org" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">GIMP <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Open source photo editing software, alternative to Photoshop</div>
+          </a>
+          <a class="card" href="https://inkscape.org" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Inkscape <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Open source vector editing software, alternative to Illustrator</div>
+          </a>
+          <a class="card" href="https://www.sketch.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Sketch <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">UI design / prototyping tool for Macs, also available as a web app</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Digital painting</h3>
+        <div class="grid">
+          <a class="card" href="https://krita.org" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Krita <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Open source digital painting software</div>
+          </a>
+          <a class="card" href="https://www.painterartist.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Corel Painter <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional digital painting software</div>
+          </a>
+          <a class="card" href="https://www.systemax.jp/en/sai" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">PaintTool SAI <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Lightweight digital painting software</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>3D</h3>
+        <div class="grid">
+          <a class="card" href="https://www.maxon.net/en/cinema-4d" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Cinema 4D <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional 3D software suite</div>
+          </a>
+          <a class="card" href="https://www.autodesk.com/products/maya" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Autodesk Maya / 3ds Max <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional 3D software</div>
+          </a>
+          <a class="card" href="https://www.blender.org" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Blender <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Open source 3D software, includes 2D/3D animation capability</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Pixel art</h3>
+        <div class="grid">
+          <a class="card" href="https://www.cosmigo.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Pro Motion NG <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional pixel art software</div>
+          </a>
+          <a class="card" href="https://www.aseprite.org" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Aseprite <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Pixel art software designed for ease of use</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Audio / DAWs</h3>
+        <div class="grid">
+          <a class="card" href="https://www.avid.com/pro-tools" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Pro Tools <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional DAW, discounted for students and teachers</div>
+          </a>
+          <a class="card" href="https://www.image-line.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">FL Studio <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional DAW by Image-Line</div>
+          </a>
+          <a class="card" href="https://www.apple.com/logic-pro" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Logic Pro <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional DAW by Apple</div>
+          </a>
+          <a class="card" href="http://www.cakewalk.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Cakewalk <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional DAWs: Next / Sonar</div>
+          </a>
+          <a class="card" href="http://reaper.fm/" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">REAPER <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Professional cross-platform DAW</div>
+          </a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Utilities</h3>
+        <div class="grid">
+          <a class="card" href="https://fontba.se" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">FontBase <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Font manager</div>
+          </a>
+          <a class="card" href="https://rightfontapp.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">RightFont <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Font manager for Macs</div>
+          </a>
+          <a class="card" href="https://nicke.tech/screentogif" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">ScreenToGif <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+            <div class="card-desc">Lightweight and powerful screen recording tool</div>
+          </a>
+          <a class="card" href="https://www.colorzilla.com" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">ColorZilla <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+            <div class="card-desc">Color picker browser extension with built-in CSS gradient generator</div>
+          </a>
+          <a class="card" href="https://uxtools.co/tools/design" target="_blank" rel="noopener noreferrer">
+            <div class="card-top"><span class="card-title">Design Tools Database <span class="arrow">↗</span></span></div>
+            <div class="card-desc">Comparison of UI, prototyping, and other tools</div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEB TOOLS -->
+    <section class="category" id="webtools">
+      <div class="cat-head">
+        <span class="cat-num">03</span>
+        <h2>Web Tools</h2>
+        <span class="cat-count">browser-based</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://www.figma.com" target="_blank" rel="noopener noreferrer">
+          <div class="card-top"><span class="card-title">Figma <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+          <div class="card-desc">UI design / prototyping tool</div>
+        </a>
+        <a class="card" href="https://trello.com" target="_blank" rel="noopener noreferrer">
+          <div class="card-top"><span class="card-title">Trello <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+          <div class="card-desc">Productivity / project management / collaboration tool</div>
+        </a>
+        <a class="card" href="https://www.notion.so" target="_blank" rel="noopener noreferrer">
+          <div class="card-top"><span class="card-title">Notion <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+          <div class="card-desc">Productivity / project management / collaboration tool</div>
+        </a>
+        <a class="card" href="https://www.photopea.com" target="_blank" rel="noopener noreferrer">
+          <div class="card-top"><span class="card-title">Photopea <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div>
+          <div class="card-desc">Clone of Photoshop mimicking many of its features</div>
+        </a>
+        <a class="card" href="https://editor.method.ac" target="_blank" rel="noopener noreferrer">
+          <div class="card-top"><span class="card-title">Method Draw <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div>
+          <div class="card-desc">Simple vector editor</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ASSETS -->
+    <section class="category" id="assets">
+      <div class="cat-head">
+        <span class="cat-num">04</span>
+        <h2>Assets</h2>
+        <span class="cat-count">stock, mock-ups, illustration</span>
+      </div>
+      <p style="color:var(--paper-dim);font-size:13px;margin-top:-6px;margin-bottom:24px;max-width:640px;">All sites listed offer assets available for commercial use, many freely under CC0. Always check licensing before publishing work commercially.</p>
+
+      <div class="subgroup">
+        <h3>Stock photography / video</h3>
+        <div class="grid">
+          <a class="card" href="https://unsplash.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Unsplash <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography</div></a>
+          <a class="card" href="https://www.pexels.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Pexels <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography</div></a>
+          <a class="card" href="https://negativespace.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Negative Space <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography</div></a>
+          <a class="card" href="https://isorepublic.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">ISO Republic <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography / video</div></a>
+          <a class="card" href="https://stocksnap.io" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">StockSnap <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography</div></a>
+          <a class="card" href="https://www.lifeofpix.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Life of Pix <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Stock photography</div></a>
+          <a class="card" href="https://www.pxfuel.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Pxfuel <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography</div></a>
+          <a class="card" href="https://www.everypixel.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">EveryPixel <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">AI-powered search aggregator for stock photography / graphics</div></a>
+          <a class="card" href="https://stockup.sitebuilderreport.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Stock Up <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography aggregator</div></a>
+          <a class="card" href="https://librestock.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">LibreStock <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography aggregator</div></a>
+          <a class="card" href="https://mixkit.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Mixkit <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock video / music / sound effects</div></a>
+          <a class="card" href="https://coverr.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Coverr <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock video footage</div></a>
+          <a class="card" href="https://envato.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Envato Elements <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Huge collection of design assets, subscription based</div></a>
+          <a class="card" href="https://www.stocksy.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Stocksy <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Stock photography / video</div></a>
+          <a class="card" href="https://freenaturestock.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Free Nature Stock <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Nature stock photography / video</div></a>
+          <a class="card" href="https://pixabay.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Pixabay <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Stock photography / video / vectors</div></a>
+          <a class="card" href="https://www.vecteezy.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Vecteezy <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Stock photography / video / vectors</div></a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Mock-ups, textures &amp; misc assets</h3>
+        <div class="grid">
+          <a class="card" href="https://www.textures.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Textures.com <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">High quality textures</div></a>
+          <a class="card" href="https://craftwork.design" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Craftwork <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Mock-ups, interface assets</div></a>
+          <a class="card" href="https://graphicburger.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">GraphicBurger <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Mock-ups, UI kits, icons, vectors</div></a>
+          <a class="card" href="https://smartmockups.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Smartmockups <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Mock-ups</div></a>
+          <a class="card" href="https://www.magnific.com/" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Magnific <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Stock photography, mock-ups, vectors</div></a>
+          <a class="card" href="https://mrmockup.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Mr. Mockup <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Mock-ups</div></a>
+          <a class="card" href="https://www.mockupworld.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Mockupworld <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Mock-up aggregator</div></a>
+          <a class="card" href="https://mockups-design.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Mockups-Design <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Mock-up aggregator</div></a>
+          <a class="card" href="https://pixelbuddha.net" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Pixel Buddha <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Various design assets</div></a>
+          <a class="card" href="https://creativemarket.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Creative Market <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Various design assets</div></a>
+          <a class="card" href="https://freebiesbug.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Freebiesbug <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Directory of free design assets</div></a>
+        </div>
+      </div>
+
+      <div class="subgroup">
+        <h3>Illustration &amp; icons</h3>
+        <div class="grid">
+          <a class="card" href="https://www.opendoodles.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Open Doodles <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Open source hand-drawn illustration library</div></a>
+          <a class="card" href="https://www.openpeeps.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Open Peeps <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Customizable open source hand-drawn illustration library</div></a>
+          <a class="card" href="https://feathericons.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Feather Icons <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Open source UI icons</div></a>
+          <a class="card" href="https://undraw.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">unDraw <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Open-source color-customizable illustrations</div></a>
+          <a class="card" href="https://brandeps.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">BrandEPS <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Brand logos / vector icons</div></a>
+          <a class="card" href="https://www.toptal.com/designers/subtlepatterns" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Subtle Patterns <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Tileable patterns for the web</div></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section class="category" id="typography">
+      <div class="cat-head">
+        <span class="cat-num">05</span>
+        <h2>Typography</h2>
+        <span class="cat-count">fonts, foundries, pairing</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://fonts.google.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Google Fonts <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Fonts collection</div></a>
+        <a class="card" href="https://www.fontshare.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Fontshare <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">High quality free fonts by the Indian Type Foundry</div></a>
+        <a class="card" href="https://fonts.adobe.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Adobe Fonts <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free w/ CC</span></div></div><div class="card-desc">Directory of fonts available through Adobe</div></a>
+        <a class="card" href="https://www.myfonts.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">MyFonts <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Marketplace including fonts from major foundries</div></a>
+        <a class="card" href="https://www.typography.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Hoefler&amp;Co. <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Popular type foundry</div></a>
+        <a class="card" href="https://www.fontspring.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Fontspring <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Marketplace including fonts from major foundries</div></a>
+        <a class="card" href="http://www.losttype.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Lost Type <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Pay-what-you-want collaborative type foundry</div></a>
+        <a class="card" href="https://www.fontsquirrel.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Font Squirrel <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Royalty-free font collection</div></a>
+        <a class="card" href="https://befonts.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Befonts <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Royalty-free font collection</div></a>
+        <a class="card" href="https://fontsinuse.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Fonts In Use <span class="arrow">↗</span></span></div><div class="card-desc">Archive of typography</div></a>
+        <a class="card" href="https://www.typewolf.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Typewolf <span class="arrow">↗</span></span></div><div class="card-desc">Archive of typography</div></a>
+        <a class="card" href="https://fontjoy.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Fontjoy <span class="arrow">↗</span></span></div><div class="card-desc">Font pairing tool</div></a>
+        <a class="card" href="https://www.fontpair.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">fontpair <span class="arrow">↗</span></span></div><div class="card-desc">Font pairing tool</div></a>
+        <a class="card" href="https://www.modularscale.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Modular Scale <span class="arrow">↗</span></span></div><div class="card-desc">Tool for optimally scaling type for the web</div></a>
+        <a class="card" href="https://type-scale.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Type Scale <span class="arrow">↗</span></span></div><div class="card-desc">Tool for optimally scaling type for the web</div></a>
+      </div>
+    </section>
+
+    <!-- FONT ID -->
+    <section class="category" id="fontid">
+      <div class="cat-head">
+        <span class="cat-num">06</span>
+        <h2>Font Identification</h2>
+        <span class="cat-count">"what font is this?"</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="http://whatthefont.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">What The Font <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Font identification provided by myfonts.com</div></a>
+        <a class="card" href="https://www.fontspring.com/matcherator" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Fontspring's Font Finder <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Font identification provided by Fontspring</div></a>
+        <a class="card" href="https://www.fontinlogo.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Font in Logo <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Identify fonts used in popular logos</div></a>
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section class="category" id="color">
+      <div class="cat-head">
+        <span class="cat-num">07</span>
+        <h2>Color</h2>
+        <span class="cat-count">palettes &amp; accessibility</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://www.interaction-design.org/literature/topics/color-theory" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">What is Color Theory? <span class="arrow">↗</span></span></div><div class="card-desc">A guide for designers</div></a>
+        <a class="card" href="https://coolors.co" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Coolors <span class="arrow">↗</span></span></div><div class="card-desc">Color palette generator</div></a>
+        <a class="card" href="https://color.adobe.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Adobe Color <span class="arrow">↗</span></span></div><div class="card-desc">Color palette tool</div></a>
+        <a class="card" href="https://mycolor.space" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">ColorSpace <span class="arrow">↗</span></span></div><div class="card-desc">Color palette generator and color gradient tool</div></a>
+        <a class="card" href="https://hexnaw.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Hex Naw <span class="arrow">↗</span></span></div><div class="card-desc">Color accessibility tool</div></a>
+        <a class="card" href="https://colors.eva.design" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Eva Design System <span class="arrow">↗</span></span></div><div class="card-desc">Deep learning UI color generator</div></a>
+      </div>
+    </section>
+
+    <!-- SHARE -->
+    <section class="category" id="share">
+      <div class="cat-head">
+        <span class="cat-num">08</span>
+        <h2>Share Your Work</h2>
+        <span class="cat-count">portfolios &amp; platforms</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://www.behance.net" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Behance <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span></div></div><div class="card-desc">Social platform for sharing creative work</div></a>
+        <a class="card" href="https://dribbble.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Dribbble <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Social platform for sharing creative work</div></a>
+        <a class="card" href="https://www.artstation.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">ArtStation <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Portfolio, website builder, marketplace and learning resources</div></a>
+        <a class="card" href="https://portfolio.adobe.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Adobe Portfolio <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free w/ CC</span></div></div><div class="card-desc">Site builder for creative work portfolios</div></a>
+        <a class="card" href="https://www.squarespace.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Squarespace <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">CMS with beginner-friendly site builder</div></a>
+        <a class="card" href="https://www.wix.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Wix <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">CMS with beginner-friendly site builder</div></a>
+        <a class="card" href="https://wordpress.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">WordPress <span class="arrow">↗</span></span><div class="badges"><span class="badge free">free</span><span class="badge paid">$</span></div></div><div class="card-desc">Longstanding CMS with high customizability and legacy support</div></a>
+        <a class="card" href="https://webflow.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Webflow <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">CMS with a high degree of customizability</div></a>
+        <a class="card" href="https://cargo.site" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Cargo <span class="arrow">↗</span></span><div class="badges"><span class="badge paid">$</span></div></div><div class="card-desc">Website creation catered to designers</div></a>
+      </div>
+    </section>
+
+    <!-- MISC -->
+    <section class="category" id="misc">
+      <div class="cat-head">
+        <span class="cat-num">09</span>
+        <h2>Miscellaneous</h2>
+        <span class="cat-count">the odds and ends drawer</span>
+      </div>
+      <div class="grid">
+        <a class="card" href="https://www.designresourc.es" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Design Resources <span class="arrow">↗</span></span></div><div class="card-desc">Directory of various design resources</div></a>
+        <a class="card" href="https://shortcuts.design" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Shortcuts.design <span class="arrow">↗</span></span></div><div class="card-desc">Searchable index of shortcuts for popular creative software</div></a>
+        <a class="card" href="https://sharpen.design" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Sharpen <span class="arrow">↗</span></span></div><div class="card-desc">Randomized design prompts</div></a>
+        <a class="card" href="https://www.checklist.design" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Checklist Design <span class="arrow">↗</span></span></div><div class="card-desc">Collection of best design practices</div></a>
+        <a class="card" href="https://uxtools.co/tools/design" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Design Tools Database <span class="arrow">↗</span></span></div><div class="card-desc">Comparison of UI, prototyping, and other tools</div></a>
+        <a class="card" href="https://www.are.na/evan-collins-1522646491" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">Are.na / Evan Collins <span class="arrow">↗</span></span></div><div class="card-desc">Extensive collection of design trends from the 80s to present-day</div></a>
+        <a class="card" href="https://tinypng.com" target="_blank" rel="noopener noreferrer"><div class="card-top"><span class="card-title">TinyPNG <span class="arrow">↗</span></span></div><div class="card-desc">Optimize your PNGs and JPEGs for the web</div></a>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  Every link on this page opens in a new tab (target="_blank"). Originally compiled by the <a href="https://discord.com/invite/graphicdesign" target="_blank" rel="noopener noreferrer">r/graphicdesign Discord</a> community.
+</footer>
+
+<script>
+  // Highlight active section in the index nav on scroll
+  const sections = document.querySelectorAll('section.category');
+  const navLinks = document.querySelectorAll('nav.index a');
+  const map = {};
+  navLinks.forEach(l => map[l.getAttribute('href').slice(1)] = l);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const link = map[entry.target.id];
+      if (!link) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
